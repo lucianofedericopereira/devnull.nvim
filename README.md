@@ -30,7 +30,7 @@ It uses the public dev-null.sh API, which is read-only. You can read profiles an
 
 ```lua
 {
-  "lucianofullstack/devnull.nvim",
+  "lucianofedericopereira/devnull.nvim",
   cmd = "DevNull",
   opts = {
     username = "your-github-username",
