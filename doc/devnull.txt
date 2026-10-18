@@ -1,0 +1,68 @@
+*devnull.txt*  Browse dev-null.sh from Neovim
+
+Author:  Luciano Federico Pereira
+License: MIT
+
+==============================================================================
+CONTENTS                                                      *devnull*
+
+  1. Commands ................................ |devnull-commands|
+  2. Keymaps ................................. |devnull-keymaps|
+  3. Configuration ........................... |devnull-config|
+  4. Highlights .............................. |devnull-highlights|
+
+Read-only client for the public dev-null.sh API. Requires Neovim 0.10+ and
+curl.
+
+==============================================================================
+1. COMMANDS                                          *devnull-commands*
+
+                                                              *:DevNull*
+:DevNull                    Open the profile of the configured `username`.
+:DevNull {username}         Open {username}'s profile and commits.
+:DevNull user {username}    Same as above.
+:DevNull commit {id}        Open a commit. {id} may also be a dev-null.sh
+                            commit URL.
+
+==============================================================================
+2. KEYMAPS                                            *devnull-keymaps*
+
+  <CR>   Open the commit under the cursor
+  gx     Open the commit (or profile) in the browser
+  a      Open the author's profile
+  p      Open the parent commit of a reply
+  yu     Yank the URL to the + and " registers
+  ]]     Load the next page
+  t      Toggle replies in the timeline
+  R      Refresh
+  q      Close the buffer
+  g?     Show keymaps
+
+==============================================================================
+3. CONFIGURATION                                       *devnull-config*
+
+>lua
+  require("devnull").setup({
+    base_url = "https://dev-null.sh",
+    username = nil,
+    open = "tab",        -- "tab" | "split" | "vsplit" | "current"
+    timeout = 10000,
+    keymaps = {
+      open = "<CR>", browser = "gx", more = "]]", refresh = "R",
+      replies = "t", parent = "p", author = "a", yank = "yu",
+      close = "q", help = "g?",
+    },
+  })
+<
+Set any keymap to `false` to disable it.
+
+==============================================================================
+4. HIGHLIGHTS                                       *devnull-highlights*
+
+  DevNullTitle      Title          DevNullStars      DiagnosticWarn
+  DevNullHash       Identifier     DevNullReplies    DiagnosticInfo
+  DevNullAuthor     Function       DevNullLink       Underlined
+  DevNullMeta       Comment        DevNullReply      Special
+  DevNullSeparator  NonText
+
+ vim:tw=78:ts=8:ft=help:norl:
